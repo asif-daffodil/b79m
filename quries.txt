@@ -1,0 +1,54 @@
+database
+create
+read
+update
+Delete
+
+table
+create
+read
+update
+Delete
+
+column
+create
+read
+update
+Delete
+
+SELECT * FROM `users`
+SELECT `user name` FROM `users`;
+SELECT `user name`, `gender` FROM `users`;
+SELECT `users`.`user name`, `users`.`gender` FROM `users`;
+SELECT `users`.`user name` AS `Person Name`, `users`.`gender` AS `Person Gender` FROM `users`;
+SELECT `users`.`user name` AS `Person Name`, `users`.`gender` AS `Person Gender` FROM `users` WHERE `users`.`id` = 1;
+INSERT INTO `users`(`user name`, `address`, `gender`) VALUES ('Asif Abir', 'Dhaka', 'Male')
+UPDATE `users` SET `role`='admin' WHERE `id` = 3
+DELETE FROM `users` WHERE `id` = 3
+
+CREATE TABLE `access` (
+    `id` int(11) PRIMARY KEY AUTO_INCREMENT,
+    `name` char(100),
+    `user_id` int(11),
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+)
+
+INSERT INTO `access`(`access_name`, `user_id`) VALUES 
+('User List', 1), 
+('User List', 2),
+('Change Password', 1),
+('Change Password', 2),
+('Change Password', 4)
+
+ALTER TABLE `access` CHANGE `name` `access_name` CHAR(100)
+ALTER TABLE `access` ADD `testings` VARCHAR(100) AFTER `user_id`
+ALTER TABLE `access` DROP COLUMN `testings`
+
+SELECT `users`.`user name` AS `Name`, `users`.`address` AS `Area`, 
+`users`.`gender` AS `Gender`, `users`.`role` AS `Power`, 
+`access`.`access_name` AS `Access Area` FROM `users` 
+INNER JOIN `access` 
+ON `access`.`user_id` = `users`.`id` 
+WHERE `users`.`user name` = 'Nadim' 
+ORDER BY `users`.`id` DESC;
